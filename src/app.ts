@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import logger from "./utils/logger"; 
+import routes from "./routes";
 
 import { errorHandler } from "./middlewares/errorHandler";
 
@@ -39,6 +40,8 @@ app.get("/health", (req: Request, res: Response) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.use("/api/v1", routes);
 
 // Global Error Handler
 app.use(errorHandler);
