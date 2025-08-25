@@ -5,10 +5,7 @@ import { generateWebsite, injectCMSData } from "../controllers/websiteGenerator.
 const router = Router();
 
 // Main generation endpoint
-router.post("/generate", (req, res, next) => {
-  console.log("ello");
-  next();
-}, generateWebsite);
+router.post("/generate", generateWebsite);
 
 
 // CMS data injection endpoint

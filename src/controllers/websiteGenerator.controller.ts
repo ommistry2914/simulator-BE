@@ -17,7 +17,6 @@ const generateWebsiteSchema = z.object({
 export const generateWebsite = async (req: Request, res: Response): Promise<void> => {
   try {
     // Validate request body
-    console.log("req.body", req.body);
     const validationResult = generateWebsiteSchema.safeParse(req.body);
     
     if (!validationResult.success) {

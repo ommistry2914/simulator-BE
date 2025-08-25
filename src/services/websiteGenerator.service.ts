@@ -2,6 +2,7 @@
 import OpenAI from 'openai';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Anthropic from '@anthropic-ai/sdk';
+import config from "../config/db/index";
 
 interface GenerateWebsiteParams {
   projectName: string;
@@ -28,12 +29,8 @@ class WebsiteGeneratorService {
     // this.openai = new OpenAI({ 
     //   apiKey: process.env.OPENAI_API_KEY 
     // });
-    this.genAI = new GoogleGenerativeAI(
-      process.env.GEMINI_API_KEY || ''
-    );
-    this.anthropic = new Anthropic({ 
-      apiKey: process.env.ANTHROPIC_API_KEY 
-    });
+    this.genAI = new GoogleGenerativeAI(config.gemini_api_key);
+    this.anthropic = new Anthropic({ apiKey: config.anthropic_api_key });
     console.log("genAi", this.genAI);
   }
 
@@ -142,13 +139,7 @@ private async handleGeminiStream(
     fullResponse: string
   ): Promise<void> {
     const model = this.genAI.getGenerativeModel({ 
-      model: 'gemini-2.0-flash-exp',
-      generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 8192,
-      }
+      model: 'gemini-2.5-flash',
     });
     
     const result = await model.generateContentStream({
