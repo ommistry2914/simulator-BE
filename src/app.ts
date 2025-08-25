@@ -41,7 +41,7 @@ app.get("/health", (req: Request, res: Response) => {
   });
 });
 
-app.use("/api/v1", routes);
+app.use("/v1", routes);
 
 // Global Error Handler
 app.use(errorHandler);
